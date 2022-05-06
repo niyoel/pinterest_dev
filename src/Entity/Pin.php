@@ -82,15 +82,15 @@ class Pin
         return $this;
     }
 
-    // public function getNo(): ?string
-    // {
-    //     return $this->no;
-    // }
+    public function getNo(): ?string
+    {
+        return $this->no;
+    }
 
-    // public function setNo(string $no): self
-    // {
-    //     $this->no = $no;
+    public function setNo(string $no): self
+    {
+        $this->no = $no;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }
