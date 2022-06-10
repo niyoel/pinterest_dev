@@ -10,22 +10,22 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220506134045 extends AbstractMigration
+final class Version20220607100059 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'update de la table pin';
+        return ' user et la date';
     }
 
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE pins ADD created_at DATETIME NOT NULL, ADD updated_at DATETIME NOT NULL, ADD no VARCHAR(255) NOT NULL');
+        $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_1483A5E9E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE pins DROP created_at, DROP updated_at, DROP no');
+        $this->addSql('DROP TABLE users');
     }
 }

@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PinController!{% endblock %}
+{% block title %}pinterest{% endblock %}
 
 {% block body %}
 
     {% for pin in pins %}
         <article>
-<h2><a href="{{ path('app_pin_show', {id: pin.id}) }}">{{ pin.title }} </a></h2>                 <p>{{ pin.description|u.truncate(10,'...',false) }}</p> 
+<h2><a href="{{ path('app_pin_show', {id: pin.id}) }}">{{ pin.title }} </a></h2>
+<img src = {{ pin.imageName }} width="150" height="200">
+                 <h5>{{ pin.description|u.truncate(10,'...',false) }}</h5> 
                <p>Submitted {{ pin.createdAt|ago }}</p>      
                <p>Updated {{ pin.updatedAt|ago }}</p>      
             

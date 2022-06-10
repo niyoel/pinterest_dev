@@ -4,12 +4,13 @@ namespace App\Entity;
 use App\Repository\PinRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\Traits\Timestampable;
 #[ORM\Entity(repositoryClass: PinRepository::class)]
 #[ORM\Table(name:"pins")]
 #[ORM\HasLifecycleCallbacks]
-
 class Pin
 {
+    use Timestampable;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -26,11 +27,11 @@ class Pin
     #[Assert\Length(min:10, minMessage:'Vous devez avoir un description de minimum {{ limit }} caractères ! ')]
     private $description;
 
-    #[ORM\Column(type: 'datetime', options:['default'=>'CURRENT_TIMESTAMP'])]
-    private $createdAt;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $imageName;
 
-    #[ORM\Column(type: 'datetime', options:['default'=>'CURRENT_TIMESTAMP'])]
-    private $updatedAt;
+    // #[ORM\Column(type: 'string', length: 500, nullable: true)]
+    // private $image_name="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
 
     public function getId(): ?int
     {
@@ -61,38 +62,17 @@ class Pin
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getImageName(): ?string
     {
-        return $this->createdAt;
+        return $this->imageName;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setImageName(?string $imageName): self
     {
-        $this->createdAt = $createdAt;
+        $this->imageName = $imageName;
 
         return $this;
     }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-    #[ORM\PrePersist]                
-    #[ORM\PreUpdate]    
-    public function updateTimestamps()
-    {
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTimeImmutable);
-        }
-        $this->setUpdatedAt(new \DateTimeImmutable);
-    }
-
+   
     
 }
