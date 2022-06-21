@@ -10,7 +10,9 @@
 <img src = {{ pin.imageName }} width="150" height="200">
                  <h5>{{ pin.description|u.truncate(10,'...',false) }}</h5> 
                <p>Submitted {{ pin.createdAt|ago }}</p>      
-               <p>Updated {{ pin.updatedAt|ago }}</p>      
+               <p>Updated {{ pin.updatedAt|ago }}</p> 
+               <p>Created by {{ pin.user.firstName ~ " "~ pin.user.lastName }}</p>      
+     
             
         </article>
     {% else %}
