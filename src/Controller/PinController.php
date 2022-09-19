@@ -26,6 +26,17 @@ class PinController extends AbstractController
     #[Route("/pin/create", name:"app_pin_create", methods: ["GET","POST"])]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
+        if($this->getUser()){
+
+        
+        if ($this->getUser()->isVerified() == false) {
+            $this->addFlash('error', 'You must confirm your email to create Pin!');
+            return $this->redirectToRoute('app_home');
+        }
+    }else{
+        $this->addFlash('error', 'You must register first to create Pin!');
+            return $this->redirectToRoute('app_register'); 
+    }
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
         $form->handleRequest($request);

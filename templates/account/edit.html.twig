@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title 'Edit User #' ~ app.user.id %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1>
+        Edit User #{{ app.user.id }}
+      </h1>
+      {{
+        include(
+          'pin/_form.html.twig',
+          {
+            submitButtonText: 'Update user'
+          }
+        )
+      }}
+    </div>
+  </div>
+{% endblock %}

@@ -9,9 +9,11 @@
         <p>Submitted {{ pin.createdAt|date }}</p>
         <p>Updated {{ pin.updatedAt|date }}</p>
 
+          {% if app.user is same as pin.user %}
     </article>
         <a href="{{ path('app_pin_edit', {id: pin.id}) }}">Edit Pin | </a>
         <a href="#" onclick="event.preventDefault(); confirm('Are you sure ?') && document.getElementById('js-pin-delete-form').submit();">Delete | </a>
+        {% endif %}
         <a href="{{ path('app_home') }}">Go Back</a>
         <p><h3>{{ pin.user.firstName ~ " "~ pin.user.lastName }}</h3></p>
         <form id="js-pin-delete-form" action="{{ path('app_pin_delete', {id: pin.id}) }}" method="post" style="display:none;">
